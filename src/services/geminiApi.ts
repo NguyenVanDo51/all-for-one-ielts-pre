@@ -54,7 +54,7 @@ export class GeminiApiService {
 
 Format your response as a JSON object with exactly this structure:
 {
-  "question": "The grammar question here by English",
+  "question": "The grammar question here by English. For example: If I ______ enough money, I ______ a new car",
   "options": ["Option A", "Option B", "Option C", "Option D"],
   "correctAnswer": 0,
   "explanation": {
