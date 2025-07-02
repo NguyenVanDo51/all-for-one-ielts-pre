@@ -7,6 +7,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { DifficultySelector } from '../components/DifficultySelector';
+import { supabase } from '../lib/supabase';
 
 export const QuizPage: React.FC = () => {
   const [quizState, setQuizState] = useState<QuizState>({
