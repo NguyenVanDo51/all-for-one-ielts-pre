@@ -169,7 +169,7 @@ function App() {
 
   return (
     <div className="min-h-screen gradient-bg py-8 px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
