@@ -42,24 +42,75 @@ CREATE POLICY "Authenticated users can manage grammar types"
 
 -- Insert default grammar types
 INSERT INTO grammar_types (name, category) VALUES
-  ('Present Simple Positive', 'Present Tenses'),
-  ('Present Simple Negative', 'Present Tenses'),
-  ('Present Simple Questions', 'Present Tenses'),
-  ('Present Continuous Positive', 'Present Tenses'),
-  ('Present Continuous Negative', 'Present Tenses'),
-  ('Present Continuous Questions', 'Present Tenses'),
-  ('Past Simple Positive', 'Past Tenses'),
-  ('Past Simple Negative', 'Past Tenses'),
-  ('Past Simple Questions', 'Past Tenses'),
-  ('Past Continuous Positive', 'Past Tenses'),
-  ('First Conditional', 'Conditionals'),
-  ('Second Conditional', 'Conditionals'),
-  ('Third Conditional', 'Conditionals'),
-  ('Zero Conditional', 'Conditionals'),
-  ('Present Perfect Positive', 'Perfect Tenses'),
-  ('Present Perfect Negative', 'Perfect Tenses'),
-  ('Modal Verbs - Can/Could', 'Modal Verbs'),
-  ('Modal Verbs - Should/Must', 'Modal Verbs'),
-  ('Passive Voice Present', 'Passive Voice'),
-  ('Passive Voice Past', 'Passive Voice')
+-- Present Tenses
+  ('Present Perfect Continuous', 'Present Tenses'),
+
+-- Past Tenses
+  ('Past Perfect', 'Past Tenses'),
+  ('Past Perfect Continuous', 'Past Tenses'),
+
+-- Future Tenses
+  ('Future Simple (will)', 'Future Tenses'),
+  ('Be going to', 'Future Tenses'),
+  ('Future Continuous', 'Future Tenses'),
+  ('Future Perfect', 'Future Tenses'),
+  ('Future Perfect Continuous', 'Future Tenses'),
+
+-- Conditionals
+  ('Mixed Conditionals', 'Conditionals'),
+
+-- Perfect Tenses
+  ('Future Perfect', 'Perfect Tenses'),
+  ('Future Perfect Continuous', 'Perfect Tenses'),
+
+-- Modal Verbs
+  ('Modal Verbs - May/Might', 'Modal Verbs'),
+  ('Modal Verbs - Have to/Need to/Ought to', 'Modal Verbs'),
+  ('Modal Verbs - Deduction', 'Modal Verbs'),
+
+-- Passive Voice
+  ('Passive Voice Future', 'Passive Voice'),
+  ('Passive Voice with Modals', 'Passive Voice'),
+
+-- Reported Speech
+  ('Reported Speech - Statements', 'Reported Speech'),
+  ('Reported Speech - Questions', 'Reported Speech'),
+  ('Reported Speech - Commands/Requests', 'Reported Speech'),
+
+-- Relative Clauses
+  ('Relative Clauses - Defining/Non-defining', 'Relative Clauses'),
+  ('Relative Pronouns', 'Relative Clauses'),
+
+-- Verb Patterns
+  ('Gerund after verb', 'Verb Patterns'),
+  ('Infinitive after verb', 'Verb Patterns'),
+  ('Verb + object + to V', 'Verb Patterns'),
+
+-- Articles & Determiners
+  ('Articles - a/an/the', 'Articles'),
+  ('Some/Any/Much/Many', 'Quantifiers'),
+  ('This/That/These/Those', 'Determiners'),
+
+-- Comparisons
+  ('Comparatives and Superlatives', 'Comparisons'),
+  ('As...as / Not as...as', 'Comparisons'),
+  ('Too / Enough', 'Comparisons'),
+
+-- Question Forms
+  ('WH- Questions', 'Question Forms'),
+  ('Yes/No Questions', 'Question Forms'),
+  ('Question Tags', 'Question Forms'),
+
+-- Sentence Structures
+  ('So / Such', 'Sentence Structures'),
+  ('Although / Even though / In spite of', 'Sentence Structures'),
+  ('Because / Because of / Due to', 'Sentence Structures'),
+  ('Neither / Either / Both', 'Sentence Structures'),
+  ('Inversion', 'Advanced Grammar'),
+
+-- Miscellaneous
+  ('Causative Form', 'Advanced Grammar'),
+  ('Emphasis with do/does', 'Sentence Structures'),
+  ('Ellipsis and Substitution', 'Advanced Grammar'),
+  ('Common Phrasal Verbs', 'Vocabulary & Usage')
 ON CONFLICT (name) DO NOTHING;
