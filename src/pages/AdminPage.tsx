@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { AdminQuizQuestion, GrammarType, CreateQuestionRequest } from '../types/admin';
 import { AdminApiService } from '../services/adminApi';
 import { QuestionForm } from '../components/admin/QuestionForm';
@@ -122,12 +123,20 @@ export const AdminPage: React.FC = () => {
               <h1 className="text-3xl font-bold text-gray-900">Quiz Admin</h1>
               <p className="text-gray-600 mt-1">Manage quiz questions and grammar types</p>
             </div>
-            <button
-              onClick={() => setShowForm(true)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              Add New Question
-            </button>
+            <div className="flex items-center space-x-4">
+              <Link
+                to="/"
+                className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                ← Back to Quiz
+              </Link>
+              <button
+                onClick={() => setShowForm(true)}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              >
+                Add New Question
+              </button>
+            </div>
           </div>
         </div>
       </div>
