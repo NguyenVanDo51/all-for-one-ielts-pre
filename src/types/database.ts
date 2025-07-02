@@ -5,6 +5,7 @@ export interface Database {
         Row: {
           id: string;
           name: string;
+          name_vi: string;
           category: string;
           created_at: string;
           updated_at: string;
@@ -12,6 +13,7 @@ export interface Database {
         Insert: {
           id?: string;
           name: string;
+          name_vi: string;
           category: string;
           created_at?: string;
           updated_at?: string;
@@ -19,6 +21,7 @@ export interface Database {
         Update: {
           id?: string;
           name?: string;
+          name_vi?: string;
           category?: string;
           created_at?: string;
           updated_at?: string;
