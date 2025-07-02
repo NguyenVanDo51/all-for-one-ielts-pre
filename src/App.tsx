@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { QuizState, Language, DifficultyLevel } from './types/quiz';
+import { QuizState, Language, DifficultyLevel, EnglishLevel } from './types/quiz';
 import { GeminiApiService } from './services/geminiApi';
 import { QuizQuestion } from './components/QuizQuestion';
 import { LoadingSpinner } from './components/LoadingSpinner';
@@ -7,13 +7,6 @@ import { ErrorMessage } from './components/ErrorMessage';
 import { LanguageToggle } from './components/LanguageToggle';
 import { DifficultySelector } from './components/DifficultySelector';
 
-enum EnglishLevel {
-  A1, A2, B1,B2,C1,C2 
-}
-
-enum QuizLevel = EnglishLevel & {
-  Auto,A1, A2, B1,B2,C1,C2 
-}
 
 function App() {
   const [quizState, setQuizState] = useState<QuizState>({
@@ -22,15 +15,15 @@ function App() {
     showResult: false,
     loading: false,
     error: null,
-    difficultyLevel: 'Auto',
-    actualLevel: 'B1',
+    difficultyLevel: EnglishLevel.Auto,
+    actualLevel: EnglishLevel.B1,
   });
 
   const [language, setLanguage] = useState<Language>('en');
 
   // Helper function to get next level based on performance
-  const getNextLevel = (currentLevel: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2', isCorrect: boolean): 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2' => {
-    const levels: ('A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2')[] = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  const getNextLevel = (currentLevel: EnglishLevel, isCorrect: boolean): EnglishLevel => {
+    const levels: EnglishLevel[] = [EnglishLevel.A1, EnglishLevel.A2, EnglishLevel.B1, EnglishLevel.B2, EnglishLevel.C1, EnglishLevel.C2];
     const currentIndex = levels.indexOf(currentLevel);
     
     if (isCorrect) {
@@ -44,20 +37,20 @@ function App() {
 
   const loadNewQuestion = async (level?: DifficultyLevel, isCorrect?: boolean) => {
     let targetLevel: DifficultyLevel;
-    let actualLevel: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+    let actualLevel: EnglishLevel;
 
     if (level) {
       // Manual level change
       targetLevel = level;
-      actualLevel = level === 'Auto' ? 'A1' : level as 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
-    } else if (quizState.difficultyLevel === 'Auto' && typeof isCorrect === 'boolean') {
+      actualLevel = level === EnglishLevel.Auto ? EnglishLevel.A1 : level as EnglishLevel;
+    } else if (quizState.difficultyLevel === EnglishLevel.Auto && typeof isCorrect === 'boolean') {
       // Auto mode with performance feedback
-      targetLevel = 'Auto';
+      targetLevel = EnglishLevel.Auto;
       actualLevel = getNextLevel(quizState.actualLevel, isCorrect);
     } else {
       // Default behavior
       targetLevel = quizState.difficultyLevel;
-      actualLevel = quizState.difficultyLevel === 'Auto' ? quizState.actualLevel : quizState.difficultyLevel as 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+      actualLevel = quizState.difficultyLevel === EnglishLevel.Auto ? quizState.actualLevel : quizState.difficultyLevel as EnglishLevel;
     }
     
     setQuizState(prev => ({
@@ -95,7 +88,7 @@ function App() {
   };
 
   const handleNextQuestion = () => {
-    if (quizState.difficultyLevel === 'Auto' && quizState.currentQuestion && quizState.selectedAnswer !== null) {
+    if (quizState.difficultyLevel === EnglishLevel.Auto && quizState.currentQuestion && quizState.selectedAnswer !== null) {
       const isCorrect = quizState.selectedAnswer === quizState.currentQuestion.correctAnswer;
       loadNewQuestion(undefined, isCorrect);
     } else {
@@ -168,7 +161,7 @@ function App() {
   };
 
   const getCurrentLevelDisplay = () => {
-    if (quizState.difficultyLevel === 'Auto') {
+    if (quizState.difficultyLevel === EnglishLevel.Auto) {
       return `Auto (${quizState.actualLevel} - ${getLevelDescription(quizState.actualLevel)})`;
     }
     return `${quizState.difficultyLevel} - ${getLevelDescription(quizState.difficultyLevel)}`;
