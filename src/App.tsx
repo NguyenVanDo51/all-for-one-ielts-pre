@@ -6,9 +6,10 @@ import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorMessage } from './components/ErrorMessage';
 import { LanguageToggle } from './components/LanguageToggle';
 import { DifficultySelector } from './components/DifficultySelector';
-
+import { AdminPage } from './pages/AdminPage';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState<'quiz' | 'admin'>('quiz');
   const [quizState, setQuizState] = useState<QuizState>({
     currentQuestion: null,
     selectedAnswer: null,
@@ -104,10 +105,12 @@ function App() {
     loadNewQuestion(newLevel);
   };
 
-  // Load first question on mount
+  // Load first question on mount (only for quiz page)
   useEffect(() => {
-    loadNewQuestion();
-  }, []);
+    if (currentPage === 'quiz') {
+      loadNewQuestion();
+    }
+  }, [currentPage]);
 
   const getLocalizedText = (key: string) => {
     const texts = {
@@ -167,9 +170,23 @@ function App() {
     return `${quizState.difficultyLevel} - ${getLevelDescription(quizState.difficultyLevel)}`;
   };
 
+  if (currentPage === 'admin') {
+    return <AdminPage />;
+  }
+
   return (
     <div className="min-h-screen gradient-bg py-8 px-4">
       <div className="max-w-4xl mx-auto">
+        {/* Navigation */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => setCurrentPage('admin')}
+            className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-colors"
+          >
+            Admin Panel
+          </button>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
